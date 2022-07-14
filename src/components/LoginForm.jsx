@@ -1,10 +1,16 @@
 import { TextField } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addToken } from "../store/slices/tokenSlice";
+import { Navigate, useNavigate } from "react-router-dom";
 import "../styles/auth.scss";
 
 function LoginForm({ setAuth }) {
+  const [msg, setMsg] = useState("");
   const [data, setData] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const url = "http://localhost:8080/auth/login";
 
   const handleInput = (e) => {
@@ -16,14 +22,21 @@ function LoginForm({ setAuth }) {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const request = await axios.post(url, data);
 
-    console.log(request);
+    try {
+      const request = await axios.post(url, data, { withCredentials: true });
+      dispatch(addToken(request.data.accessToken));
+      setData({ email: "", password: "" });
+      navigate("/secret");
+    } catch (err) {
+      setMsg(err.request.response);
+    }
   };
 
   return (
     <div className="auth-container" onSubmit={handleLogin}>
       <h2>LOGIN</h2>
+      {msg}
       <form className="form">
         <TextField
           id="email"

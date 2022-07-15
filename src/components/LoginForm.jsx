@@ -18,6 +18,7 @@ function LoginForm({ setAuth }) {
       ...prev,
       [e.target.name]: e.target.value,
     }));
+    setMsg("");
   };
 
   const handleLogin = async (e) => {
@@ -36,7 +37,9 @@ function LoginForm({ setAuth }) {
   return (
     <div className="auth-container" onSubmit={handleLogin}>
       <h2>LOGIN</h2>
-      {msg}
+      <div className="login-msg">
+        <span>{msg}</span>
+      </div>
       <form className="form">
         <TextField
           id="email"

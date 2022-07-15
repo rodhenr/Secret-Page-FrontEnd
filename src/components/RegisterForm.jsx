@@ -13,34 +13,40 @@ function RegisterForm({ setAuth }) {
       ...prev,
       [e.target.name]: e.target.value,
     }));
+    setMsg({ erro: "", sucesso: "" });
   };
 
   const registerUser = async (e) => {
     e.preventDefault();
 
-    const request = await axios.post(url, data);
-
-    if (request.status === 500)
-      return setMsg({ erro: request.data.mensagem, sucesso: "" });
-
-    if (request.data.mensagem === "Usuário já cadastrado")
-      return setMsg({ erro: request.data.mensagem, sucesso: "" });
-
-    setMsg({ erro: "", sucesso: "Usuário cadastrado com sucesso!" });
-    setTimeout(setAuth, 3000);
+    try {
+      await axios.post(url, data);
+      setMsg({ erro: "", sucesso: "Usuário cadastrado com sucesso!" });
+      setTimeout(setAuth, 2000);
+    } catch (err) {
+      const errCode = err.request.status;
+      if (errCode === 400 || errCode === 409 || errCode === 500)
+        return setMsg({ erro: err.response.data, sucesso: "" });
+    }
   };
 
   return (
     <div className="auth-container">
       <h2>REGISTRE-SE</h2>
-      {msg.erro}
-      {msg.sucesso}
+      <div className="registro-msg-erro">
+        <span>{msg.erro}</span>
+      </div>
+      <div className="registro-msg-sucesso">
+        <span>{msg.sucesso}</span>
+      </div>
+
       <form className="form" onSubmit={registerUser}>
         <TextField
           id="username"
           label="Usuário"
           name="username"
           onChange={handleInput}
+          required
           type="text"
           value={data.username}
           variant="filled"
@@ -50,6 +56,7 @@ function RegisterForm({ setAuth }) {
           label="E-Mail"
           name="email"
           onChange={handleInput}
+          required
           type="email"
           value={data.email}
           variant="filled"
@@ -59,6 +66,7 @@ function RegisterForm({ setAuth }) {
           label="Senha"
           name="password"
           onChange={handleInput}
+          required
           type="password"
           value={data.password}
           variant="filled"

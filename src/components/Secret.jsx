@@ -1,4 +1,5 @@
 import "../styles/secret.scss";
+import Button from '@mui/material/Button';
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,6 +27,19 @@ function Secret() {
     request();
   }, [api]);
 
+  api.interceptors.response.use(
+    (response) => {
+      return response;
+    },
+    async (error) => {
+      if (error.response.status === 403) {
+        const response = await refreshToken(error);
+        return response;
+      }
+      return Promise.reject(error);
+    }
+  );
+
   const refreshToken = async (error) => {
     try {
       const requestOriginal = error.config;
@@ -45,23 +59,15 @@ function Secret() {
     }
   };
 
-  api.interceptors.response.use(
-    (response) => {
-      return response;
-    },
-    async (error) => {
-      if (error.response.status === 403) {
-        const response = await refreshToken(error);
-        return response;
-      }
-      return Promise.reject(error);
-    }
-  );
+  
 
   return (
     <div className="secret-container">
       <h2>O segredo é</h2>
       <h1>{data}</h1>
+      <Button variant="contained" color="warning" onClick={() => dispatch(removeToken())}>
+        LOGOUT
+      </Button>
     </div>
   );
 }

@@ -1,70 +1,59 @@
-# Getting Started with Create React App
+## :ledger: Descrição do Projeto
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Uma aplicação que é ncessário fazer login para que se possa ver a página secreta que contém um segredo!
 
-## Available Scripts
+<p align="center">
+<img alt="gif" src="https://media1.giphy.com/media/n4T2VEiChBFbyAJQ83/giphy.gif?cid=790b76119e753557b82e7dfff49b81077e9a70bafa74da8d&rid=giphy.gif&ct=g" />
+</p>
 
-In the project directory, you can run:
+## :man_technologist: Tecnologias
 
-### `npm start`
+Para este projeto foram utilizadas as seguintes tecnologias:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**FRONT-END**
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- [React](https://pt-br.reactjs.org/)
+- [React Router](https://reactrouter.com/)
+- [Redux Toolkit](https://redux-toolkit.js.org/)
+- [SASS](https://sass-lang.com/)
+- [Material UI](https://mui.com/pt/)
+- [Axios](https://axios-http.com/ptbr/docs/intro)
 
-### `npm test`
+**BACK-END**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [Node](https://nodejs.org/en/)
+- [Express](https://expressjs.com/pt-br/)
+- [Mongoose](https://mongoosejs.com/docs/queries.html)
+- [Bcrypt](https://www.npmjs.com/package/bcrypt)
+- [JWT](https://jwt.io/)
+- [Dotenv](https://www.npmjs.com/package/dotenv)
 
-### `npm run build`
+## :dvd: Como replicar este projeto
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Front-End
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Para replicar esse projeto de forma local no seu computador siga os passos abaixo:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Você deve fazer o download/clone deste repositório para seu computador e o abrir na sua IDE.
 
-### `npm run eject`
+```
+1. Execute o comando npm i para instalar as dependências do projeto
+2. Execute o comando npm start para rodar localmente na porta 3000
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Back-End
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Você deve possuir o MongoDB instalado na sua máquina.
+- Você deve fazer o download/clone [deste](https://github.com/rodhenr/Secret-Page-BackEnd) repositório e o abrir na sua IDE.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+1. Execute o comando npm i para instalar as dependências do projeto
+2. No arquivo .env altere as informações de acordo com as suas configurações
+3. Execute o comando npm run dev para rodar o servidor localmente
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+_OBS: Arquivos .env podem possuir informações sensíveis e caso você queira subir seu projeto para o github é aconselhável que o .env seja acrescentado no seu arquivo .gitignore_
 
-## Learn More
+## :grin: Dúvidas ou sugestões?
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Caso tenha alguma dúvida ou alguma sugestão fico no aguardo da sua mensagem!

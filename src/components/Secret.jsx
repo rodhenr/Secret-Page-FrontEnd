@@ -15,27 +15,33 @@ function Secret() {
       "Access-Control-Allow-Origin": "*",
       Authorization: `Bearer ${token}`,
     },
-    baseURL: url,
   });
+
+  useEffect(() => {
+    const request = async () => {
+      const resp = await api.get(url);
+      setData(resp.data);
+    };
+
+    request();
+  }, [api]);
 
   const refreshToken = async (error) => {
     try {
       const requestOriginal = error.config;
-      delete requestOriginal.headers["Authorization"];
 
-      await axios
-        .get("http://localhost:8080/auth/refresh", { withCredentials: true })
-        .then(async (res) => {
-          const novoToken = res.data.accessToken;
-          requestOriginal.headers["Authorization"] = `Bearer ${novoToken}`;
-          dispatch(addToken(novoToken));
-          return await axios.request(requestOriginal);
-        })
-        .catch((err) => {
-          dispatch(removeToken());
-        });
+      const request = await axios.get("http://localhost:8080/auth/refresh", {
+        withCredentials: true,
+      });
+      const novoToken = request.data.accessToken;
+
+      requestOriginal.headers["Authorization"] = `Bearer ${novoToken}`;
+      dispatch(addToken(novoToken));
+      const novoRequest = await axios.request(requestOriginal);
+
+      return novoRequest;
     } catch (err) {
-      console.log(err);
+      dispatch(removeToken());
     }
   };
 
@@ -44,24 +50,13 @@ function Secret() {
       return response;
     },
     async (error) => {
-      if (error.response.status === 403) return await refreshToken(error);
+      if (error.response.status === 403) {
+        const response = await refreshToken(error);
+        return response;
+      }
       return Promise.reject(error);
     }
   );
-
-  useEffect(() => {
-    const getSecret = async () => {
-      console.log(token);
-      await api
-        .get(url)
-        .then((resp) => {
-          setData(resp.data);
-        })
-        .catch((err) => console.log(err.request.response));
-    };
-
-    getSecret();
-  }, []);
 
   return (
     <div className="secret-container">
